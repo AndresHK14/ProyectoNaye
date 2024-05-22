@@ -8,32 +8,49 @@ package segundoparcialedd;
  *
  * @author Nayeli
  */
-public class Multilista <T>
+public class Multilista<T>
 {
+
     public Nodo inserta(Nodo r, int nivel, String s[], Nodo n)
     {
-        if (s.length -1 == nivel) 
+        if (s.length - 1 == nivel)
         {
-            ListaDobleCircular obj = new ListaDobleCircular(); //técnico
-            obj.r =r; //le mando al técnico mi información
-            obj.inserta(n); 
-            return obj.r; //regresa la informacion modificada
-        }else
+            ListaDobleCircular obj = new ListaDobleCircular();
+            obj.r = r;
+            obj.inserta(n);
+            return obj.r;
+        } else
         {
-            Nodo aux = busca(r,s[nivel]);
-            if (aux!=null) 
+            Nodo aux = busca(r, s[nivel]);
+            if (aux == null)
+            {  // Si no se encuentra, se crea un nuevo nodo en ese nivel
+                aux = new Nodo(null, s[nivel]);
+                if (r == null)
+                {
+                    r = aux; // Si r es null, establece r como aux
+                } else
+                {
+                    // Lógica para insertar aux en r si no es el primer nodo
+                    Nodo temp = r;
+                    while (temp.getSig() != null)
+                    {
+                        temp = temp.getSig(); // Encuentra el último nodo
+                    }
+                    temp.setSig(aux); // Conecta el último nodo con aux
+                    aux.setAnt(temp); // Establece el anterior de aux
+                }
+                aux.setAbj(inserta(null, nivel + 1, s, n));
+            } else
             {
-                aux.setAbj(inserta(aux.getAbj(), nivel+1, s, n)); 
+                aux.setAbj(inserta(aux.getAbj(), nivel + 1, s, n));
             }
-            //No puedo retornar aux, seimpre la r
             return r;
         }
-                
     }
-    
-    public Nodo elimina(Nodo r, String etq) 
+
+    public Nodo elimina(Nodo r, String etq)
     {
-        if (r == null) 
+        if (r == null)
         {
             System.out.println("La multilista está vacía");
             return null;
@@ -41,21 +58,22 @@ public class Multilista <T>
 
         Nodo ne = busca(r, etq);
 
-        if (ne == null) 
+        if (ne == null)
         {
             System.out.println("El nodo con la etiqueta " + etq + " no fue encontrado en la multilista");
             return null;
         }
 
-        if (ne == r) 
+        if (ne == r)
         {
             // Si el nodo a eliminar es el primer nodo de la multilista
             // Actualizamos la referencia al primer nodo (r)
-            if (r.getSig() == r) 
+            if (r.getSig() == r)
             {
                 // Si la multilista tiene solo un nodo
                 r = null;
-            } else {
+            } else
+            {
                 // Si hay más de un nodo en la multilista
                 r = r.getSig(); // Movemos la referencia al siguiente nodo
             }
@@ -73,21 +91,31 @@ public class Multilista <T>
         return ne;
     }
 
-    
     public Nodo busca(Nodo r, String s)
     {
         ListaDobleCircular obj = new ListaDobleCircular();
         obj.r = r;
         return obj.busca(s);
     }
-    
+
     public void desp(Nodo r, String s)
     {
-        while(r!=null)
+        if (r == null)
         {
-            System.out.println(r.getEtq());
-            desp(r.getAbj(), s+"\t"); //antes de pasar al siguiente nodo aplico la recursividad
-            r=r.getSig();
+            return;
         }
+
+        Nodo start = r;
+        do
+        {
+            System.out.println(s + r.getEtq());
+            desp(r.getAbj(), s + "\t");  // Recursividad para manejar subniveles
+            r = r.getSig();
+            if (r == start)
+            {
+                return;  // Salir si se detecta un ciclo
+            }
+        } while (r != start && r != null);  // Continuar mientras no se regrese al inicio o se encuentre un nodo nulo
     }
+
 }
