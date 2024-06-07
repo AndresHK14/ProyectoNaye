@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package segundoparcialedd;
+package estructuras;
+
+import clases.Elemento;
 
 /**
  *
@@ -97,6 +99,13 @@ public class Multilista<T>
         obj.r = r;
         return obj.busca(s);
     }
+    
+    public Nodo buscaBajas(Nodo r, String s)
+    {
+        ListaDobleCircular obj = new ListaDobleCircular();
+        obj.r = r;
+        return obj.buscaBajas(s);
+    }
 
     public void desp(Nodo r, String s)
     {
@@ -108,6 +117,9 @@ public class Multilista<T>
         Nodo start = r;
         do
         {
+//            Elemento elemento=(Elemento)r.getObj();
+//            System.out.println("Autor: "+elemento.getAutor());
+//            System.out.println("Ruta: "+elemento.getRuta());
             System.out.println(s + r.getEtq());
             desp(r.getAbj(), s + "\t");  // Recursividad para manejar subniveles
             r = r.getSig();

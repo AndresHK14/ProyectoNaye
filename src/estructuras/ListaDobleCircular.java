@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package segundoparcialedd;
+package estructuras;
 
 /**
  *
@@ -12,12 +12,12 @@ package segundoparcialedd;
 public class ListaDobleCircular<T>
 {
 
-    Nodo r = null;
+    Nodo<T> r = null;
 
     /**
      * @return the r
      */
-    public Nodo getR()
+    public Nodo<T> getR()
     {
         return r;
     }
@@ -25,12 +25,12 @@ public class ListaDobleCircular<T>
     /**
      * @param r the r to set
      */
-    public void setR(Nodo r)
+    public void setR(Nodo<T> r)
     {
         this.r = r;
     }
 
-    public void inserta(Nodo n)
+    public void inserta(Nodo<T> n)
     {
         if (n != null)
         {
@@ -55,7 +55,7 @@ public class ListaDobleCircular<T>
                 } else
                 {
                     Nodo<T> aux = r.getSig();
-                    boolean inserted = false;
+                    boolean b = false;
 
                     do
                     {
@@ -65,13 +65,13 @@ public class ListaDobleCircular<T>
                             n.setAnt(aux.getAnt());
                             aux.getAnt().setSig(n);
                             aux.setAnt(n);
-                            inserted = true;
+                            b = true;
                             break;  // Salir del bucle una vez insertado
                         }
                         aux = aux.getSig();
-                    } while (aux != r.getSig() && !inserted);  // Evitar volver al inicio sin insertar
+                    } while (aux != r.getSig() && !b);  // Evitar volver al inicio sin insertar
 
-                    if (!inserted)
+                    if (!b)
                     {  // Si no se insertó en el bucle, insertar al final
                         n.setSig(r.getSig());
                         n.setAnt(r);
@@ -83,7 +83,7 @@ public class ListaDobleCircular<T>
         }
     }
 
-    public Nodo elimina(String etq)
+    public Nodo<T> elimina(String etq)
     {
         Nodo<T> ne = null;
 
@@ -165,19 +165,25 @@ public class ListaDobleCircular<T>
         }
     }
 
-    public void despR()
+    public void desp2()
     {
-        if (r != null)
+        if (r != null) 
         {
-            Nodo<T> aux = r;
-            do
+            Nodo<T> aux = r.getSig();  // Cambiado de r a r.getSig() para evitar la impresión del nodo de referencia
+            if (aux == null) 
+            {
+                System.out.println("La lista está vacía");
+                return;
+            }
+            do 
             {
                 System.out.println(aux.getEtq());
-                aux = aux.getAnt();
-            } while (aux != r);
-        } else
+                aux = aux.getSig();
+            } while (aux != null && aux != r.getSig());
+            
+        } else 
         {
-            System.out.println("no hay datos en la lista");
+            System.out.println("No hay datos en la lista");
         }
     }
 
@@ -194,6 +200,24 @@ public class ListaDobleCircular<T>
                 }
                 aux = aux.getSig();
             } while (aux != r);
+        }
+        return null;
+    }
+    
+    public Nodo buscaBajas(String etq)
+    {
+        if (r != null) 
+        {
+        Nodo aux = r;
+            do 
+            {
+                System.out.println("Revisando nodo: " + aux.getEtq()); // Depuración
+                if (aux.getEtq() != null && aux.getEtq().equals(etq)) 
+                {
+                    return aux;
+                }
+                aux = aux.getSig();
+            } while (aux != null && aux != r);
         }
         return null;
     }

@@ -2,27 +2,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package segundoparcialedd;
+package clases;
+
+import java.util.Date;
 
 /**
  *
  * @author Nayeli
  */
-public class Archivo 
+public class Elemento 
 {
     private String nombre;
-    private String extencion;
-    private String fecha;
+    private String extension;
+    private Date fecha;
     private String autor;
-    private char tipo;
+    private char tipo; // A para archivo C para carpeta
     private int tamanio;
     private String ruta;
     
-    public Archivo(String nombre, String extencion, String fecha, String autor, char tipo, int tamanio, String ruta)
+    public Elemento(String nombre, String extencion, char tipo, int tamanio, String ruta)
     {
-        this.autor = autor;
-        this.extencion = extencion;
-        this.fecha = fecha;
+        this.autor = System.getProperty("user.name");
+        this.extension = extencion;
+        this.fecha = new Date();
         this.nombre = nombre;
         this.ruta = ruta;
         this.tamanio = tamanio;
@@ -50,7 +52,7 @@ public class Archivo
      */
     public String getExtencion() 
     {
-        return extencion;
+        return extension;
     }
 
     /**
@@ -58,13 +60,13 @@ public class Archivo
      */
     public void setExtencion(String extencion) 
     {
-        this.extencion = extencion;
+        this.extension = extencion;
     }
 
     /**
      * @return the fecha
      */
-    public String getFecha() 
+    public Date getFecha() 
     {
         return fecha;
     }
@@ -72,7 +74,7 @@ public class Archivo
     /**
      * @param fecha the fecha to set
      */
-    public void setFecha(String fecha) 
+    public void setFecha(Date fecha) 
     {
         this.fecha = fecha;
     }
@@ -139,5 +141,11 @@ public class Archivo
     public void setRuta(String ruta) 
     {
         this.ruta = ruta;
+    }
+    
+    @Override
+    public String toString() 
+    {
+        return tipo == 'A' ? "Archivo(" + nombre + "." + extension + ", " + tamanio + "B)" : "Carpeta(" + nombre + ")";
     }
 }

@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package segundoparcialedd;
-
-import segundoparcialedd.*;
+package estructuras;
 /**
  *
  * @author Nayeli
@@ -14,15 +12,16 @@ public class Nodo <T>
 {
     private T obj;
     private String etq;
-    private Nodo sig, ant, abj;
+    private Nodo sig, ant, abj, arb;
 
     public Nodo(T obj, String etq)
     {
         this.obj = obj;
         this.etq = etq;
-        sig=null;
-        ant=null;
-        abj=null; // r
+        sig = null;
+        ant = null;
+        abj = null; // r
+        arb = null;
     }
 
 
@@ -104,8 +103,19 @@ public class Nodo <T>
     public void setAbj(Nodo abj) 
     {
         this.abj = abj;
+    } 
+
+    /**
+     * @return the arb
+     */
+    public Nodo getArb() {
+        return arb;
     }
 
-    
-    
+    /**
+     * @param arb the arb to set
+     */
+    public void setArb(Nodo arb) {
+        this.arb = arb;
+    }
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package segundoparcialedd;
+package estructuras;
 
 /**
  *
@@ -33,7 +33,7 @@ public class PrbListaDoblementeCircular
         System.out.println("Lista ascendente:");
         obj.desp();
         System.out.println("Lista descendente:");
-        obj.despR();
+        //obj.despR();
 
         // Verificar si la lista está ordenada antes de eliminar un dato
         System.out.println("************************");
@@ -52,7 +52,7 @@ public class PrbListaDoblementeCircular
         System.out.println("Lista ascendente después de eliminar:");
         obj.desp();
         System.out.println("Lista descendente después de eliminar:");
-        obj.despR();
+        //obj.despR();
 
     }
     
