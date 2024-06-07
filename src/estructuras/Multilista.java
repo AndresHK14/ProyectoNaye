@@ -49,6 +49,51 @@ public class Multilista<T>
             return r;
         }
     }
+    
+    public Nodo eliminarNodo(Nodo r, String etiqueta) {
+        if (r == null) {
+            return null; // Si el nodo inicial es nulo, retornamos null
+        }
+
+        Nodo start = r; // Nodo de inicio para detectar ciclos
+        Nodo previo = null; // Nodo previo para poder modificar enlaces
+
+        do {
+            if (r.getEtq().equals(etiqueta)) {
+                if (previo == null) {
+                    // Si el nodo a eliminar es el primero, manejamos el caso de ciclo
+                    Nodo ultimo = r;
+                    while (ultimo.getSig() != start && ultimo.getSig() != r) {
+                        ultimo = ultimo.getSig();
+                    }
+                    if (ultimo == r) {
+                        // Si sólo hay un nodo, retornamos null
+                        return null;
+                    } else {
+                        // Si hay más de un nodo, ajustamos el enlace del último nodo
+                        ultimo.setSig(r.getSig());
+                        return r.getSig(); // Retornamos el nuevo inicio
+                    }
+                } else {
+                    // Nodo a eliminar está en el medio o final
+                    previo.setSig(r.getSig());
+                    return start; // Retornamos el inicio original
+                }
+            }
+
+            // Llamada recursiva para subniveles
+            r.setAbj(eliminarNodo(r.getAbj(), etiqueta));
+
+            previo = r;
+            r = r.getSig(); // Avanzamos al siguiente nodo en el nivel actual
+            if (r == start) {
+                return start; // Salimos si detectamos un ciclo
+            }
+        } while (r != start && r != null); // Continuar mientras no se regrese al inicio o se encuentre un nodo nulo
+
+        return start; // Retornamos el inicio si no se encuentra el nodo
+    }
+
 
     public Nodo elimina(Nodo r, String etq)
     {
@@ -129,5 +174,30 @@ public class Multilista<T>
             }
         } while (r != start && r != null);  // Continuar mientras no se regrese al inicio o se encuentre un nodo nulo
     }
+
+    public Nodo buscarNodo(Nodo r, String etiqueta) {
+    if (r == null) {
+        return null; // Si el nodo inicial es nulo, retornamos null
+    }
+
+    Nodo start = r; // Nodo de inicio para detectar ciclos
+    do {
+        if (r.getEtq().equals(etiqueta)) {
+            return r; // Si encontramos el nodo con la etiqueta deseada, lo retornamos
+        }
+        
+        Nodo resultado = buscarNodo(r.getAbj(), etiqueta); // Llamada recursiva para subniveles
+        if (resultado != null) {
+            return resultado; // Si encontramos el nodo en los subniveles, lo retornamos
+        }
+        
+        r = r.getSig(); // Avanzamos al siguiente nodo en el nivel actual
+        if (r == start) {
+            return null; // Salimos si detectamos un ciclo
+        }
+    } while (r != start && r != null); // Continuar mientras no se regrese al inicio o se encuentre un nodo nulo
+
+    return null; // Si no se encuentra el nodo, retornamos null
+}
 
 }

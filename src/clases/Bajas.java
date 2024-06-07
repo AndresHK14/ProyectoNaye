@@ -7,6 +7,7 @@ package clases;
 import static clases.PrbAltas.mult;
 import static clases.PrbAltas.r;
 import estructuras.Nodo;
+import clases.Elemento;
 import java.util.Scanner;
 
 /**
@@ -21,7 +22,7 @@ public class Bajas
     
     public Nodo bajaElemento(String nombre, char tipo)
     {
-        Nodo ne =  mult.buscaBajas(r, nombre);
+        Nodo ne =  mult.buscarNodo(r, nombre);
         
         if (ne == null)
         {
@@ -44,6 +45,18 @@ public class Bajas
             }
         }
         return r;
+    }
+    
+    public Elemento bajaElimina(String nombre)
+    {
+        
+        
+       Nodo elementoEliminado = mult.eliminarNodo(r, nombre);
+        if (elementoEliminado!=null) {
+           Elemento elemento=(Elemento)elementoEliminado.getObj();
+            return elemento;
+        }
+        return null;
     }
     
     private boolean confirmarEliminacionArchivo(Nodo ne) 

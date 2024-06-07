@@ -36,8 +36,14 @@ public class PrbAltas
 
         mult.desp(r,"etq: ");
         
-        bj.bajaElemento("EDD", 'C');
+       Elemento elemento= bj.bajaElimina("archivo2");
+        if (elemento!=null) {
+            System.out.println("Elemento: "+elemento.getAutor());
+        } else {
+            System.out.println("No elimno el hd****");
+        }
        
+        System.out.println("-----------------");
        
         mult.desp(r,"etq: ");
      }
