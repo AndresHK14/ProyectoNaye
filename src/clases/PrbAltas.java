@@ -6,6 +6,7 @@ package clases;
 
 import estructuras.Multilista;
 import estructuras.Nodo;
+import clases.*;
 
 /**
  *
@@ -23,20 +24,36 @@ public class PrbAltas
      
        Altas alt = new Altas();
        Bajas bj = new Bajas();
+       CopyPaste cp = new CopyPaste();
        
        alt.altaRuta("C:", "C:", 0, 'c');
        alt.altaRuta("C:", "Documentos", 0, 'c');
        alt.altaRuta("C:/Documentos", "archivo.txt", 6, 'A');
        alt.altaRuta("C:", "Descarga", 0, 'c');
-       alt.altaRuta("C:/Descarga", "archivo2.txt", 6, 'A');
+       alt.altaRuta("C:", "Musica", 0, 'c');
+       alt.altaRuta("C:/Musica", "PerdidoEnLaOscuridadJoseJose.mp3", 6, 'A');
+       alt.altaRuta("C:/Musica", "Carpeta_Sub", 6, 'c');
+       alt.altaRuta("C:/Musica/Carpeta_Sub", "Archivo_random.txt", 6, 'A');
+       alt.altaRuta("C:", "Escritorio", 0, 'c');
+       alt.altaRuta("C:/Escritorio", "ProyectoMauro.java", 6, 'A');
+       alt.altaRuta("C:/Descarga", "ARchivo2.txt", 6, 'A');
        alt.altaRuta("C:/Documentos", "EDD", 0, 'c');
-//       alt.altaRuta("D:", "D:", 0, 'c');
-//       alt.altaRuta("D:", "Imagenes", 0, 'c');
-//       alt.altaRuta("D:/Imagenes", "img.png", 6, 'A');
 
-        mult.desp(r,"etq: ");
-        
-       Elemento elemento= bj.bajaElimina("archivo2");
+            Nodo<Elemento> fileNode = mult.buscarNodo(r, "ARchivo2");
+            System.out.println(((Elemento)fileNode.getObj()).getRuta());
+            //mult.desp(fileNode, "---");
+            Nodo<Elemento> dirNode = mult.buscarNodo(r, "Musica"); 
+            System.out.println(((Elemento)dirNode.getObj()).getRuta());
+            //mult.desp(dirNode, "**\t");
+            cp.Copiar_archivo(((Elemento)fileNode.getObj()).getRuta(), "ARchivo2",((Elemento)fileNode.getObj()).getExtencion());
+            
+            cp.Pegar_Archivo("C:/Musica/Carpeta_Sub");
+            
+            cp.Copiar_directorio(((Elemento)dirNode.getObj()).getRuta(), "Musica");
+            cp.Pegar_directorio("C:/Escritorio");
+        mult.desp(r, "etq: ");
+
+       Elemento elemento = bj.bajaElimina("Archivo_random");
         if (elemento!=null) {
             System.out.println("Elemento: "+elemento.getAutor());
         } else {

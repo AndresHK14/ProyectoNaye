@@ -40,7 +40,7 @@ public class PrbTablasHash
         NodoArbol na2= th.buscaYElimina("Ambrocio");
         if (na2!=null)
         {
-            System.out.println("Nodo eliminado: "+na2.getEtq());
+            System.out.println("Nodo eliminado: " + na2.getEtq());
         }
         
         NodoArbol na3 = th.busca("Ambrocio");
@@ -49,7 +49,7 @@ public class PrbTablasHash
             System.out.println(na3.getEtq());
         }else   
         {
-            System.out.println("Nodo no encotrado");
+            System.out.println("Nodo no Encontrado");
         }
     }
     
