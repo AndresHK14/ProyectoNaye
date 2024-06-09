@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package clases;
 
 import static clases.PrbAltas.mult;
 import static clases.PrbAltas.r;
 import estructuras.Nodo;
 
-/**
- *
- * @author Nayeli
- */
 public class Altas 
 {
     public void altaRuta(String ruta, String nombreCompleto, int tamanio, char tipo) 
@@ -69,6 +61,36 @@ public class Altas
     }
 }
 
+    
+    public void altaRuta_Nodo(String ruta,String nombre_carpeta, Nodo nod) 
+    {
+    if (!ruta.isEmpty()) 
+    {
+
+        String autor = System.getProperty("user.name");
+        String[] partesRuta = ruta.split("/");
+        
+        //Elemento nElemento = new Elemento(nombre, extension, tipo, tamanio, ruta);
+        Nodo nuevoNodo = nod;
+        
+        //Nodo busca = mult.busca(r, nombre);
+        if (r == null) 
+        {
+            String[] arr = {nombre_carpeta}; // Aquí 'nombre' en vez de 'busca.getEtq()' que parece ser incorrect
+            r = mult.inserta(r, 0, arr, nuevoNodo);
+        } else 
+        {
+            String[] arr = areglo(partesRuta,nombre_carpeta);
+            r = mult.inserta(r, 0, arr, nuevoNodo);
+        }
+    } else 
+    {
+        System.out.println("Faltan datos");
+    }
+}
+    
+    
+    
     public String[] areglo(String arr[], String nombre)
     {
        String  array[] =new String[arr.length+1];

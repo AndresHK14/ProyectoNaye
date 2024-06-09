@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package estructuras;
 
 import clases.Elemento;
 
-/**
- *
- * @author Nayeli
- */
 public class Multilista<T>
 {
 
@@ -93,7 +85,6 @@ public class Multilista<T>
 
         return start; // Retornamos el inicio si no se encuentra el nodo
     }
-
 
     public Nodo elimina(Nodo r, String etq)
     {
@@ -200,4 +191,54 @@ public class Multilista<T>
     return null; // Si no se encuentra el nodo, retornamos null
 }
 
+    
+    
+    public Nodo buscarNodo2(Nodo r, String etiqueta) {
+    if (r == null) {
+        return null; // Si el nodo inicial es nulo, retornamos null
+    }
+
+    Nodo start = r; // Nodo de inicio para detectar ciclos
+    do {
+        if (r.getEtq().equals(etiqueta)) {
+            return r; // Si encontramos el nodo con la etiqueta deseada, lo retornamos
+        }
+        
+        Nodo resultado = buscarNodo2(r.getAbj(), etiqueta); // Llamada recursiva para subniveles
+        if (resultado != null) {
+            //System.out.println("ENCONTRADO!!!: "+((Elemento)resultado.getObj()).getNombre());
+            System.out.println("ENCONTRADO EN !!!: "+((Elemento)resultado.getAbj().getObj()).getRuta());
+            resultado = resultado.getAbj(); // Explora el nodo a pegar.
+            return resultado; // Si encontramos el nodo en los subniveles, lo retornamos
+        }
+        
+        r = r.getSig(); // Avanzamos al siguiente nodo en el nivel actual
+        if (r == start) {
+            return null; // Salimos si detectamos un ciclo
+        }
+    } while (r != start && r != null); // Continuar mientras no se regrese al inicio o se encuentre un nodo nulo
+
+    return null; // Si no se encuentra el nodo, retornamos null
+}
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

@@ -20,11 +20,9 @@ public class Nodo <T>
         this.etq = etq;
         sig = null;
         ant = null;
-        abj = null; // r
+        abj = null; 
         arb = null;
     }
-
-
     /**
      * @return the obj
      */
